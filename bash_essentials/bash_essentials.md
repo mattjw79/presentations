@@ -478,4 +478,4 @@ PWD or OLDPWD variable respectively.
 ## References
 -   [Bash Reference](https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents)
 -   [Bash Beginners Guide](http://tldp.org/LDP/Bash-Beginners-Guide/html/index.html)
--   [GitHub for this Presentation](https://github.com/mattjw79/bash_essentials)
+-   [Link to presentation on GitHub](https://github.com/mattjw79/presentations/tree/master/bash_essentials)
