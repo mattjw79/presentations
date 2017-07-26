@@ -199,6 +199,7 @@ usermod -a -G demogroup demouser
     -   Defaults to the root account
     -   Requires the password of the current user
 -   Configured with visudo (/etc/sudoers)
+
 ![XKCD: Sandwich](https://imgs.xkcd.com/comics/sandwich.png)
 
 
