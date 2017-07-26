@@ -90,13 +90,13 @@
 
 ### Adding and Deleting Users
 -   Adding
-    -   useradd
+    -   useradd - create a new user or update default new user information
         ```Bash
         useradd demouser
         ```
     -   Gets default settings from /etc/default/useradd
 -   Deleting
-    -   userdel
+    -   userdel - delete a user account and related files
         ```Bash
         userdel demouser
         ```
@@ -105,20 +105,20 @@
 
 
 ### Modifying Users
--   usermod
+-   usermod - modify a user account
     ```Bash
     usermod -s /bin/tcsh demouser
     usermod -L demouser
     ```
--   chfn
+-   chfn - change "finger" information
     ```Bash
     chfn -f \"Demo User\" demouser
     ```
--   chsh
+-   chsh - change login shell
     ```Bash
     chsh -s /bin/tcsh demouser
     ```
--   passwd
+-   passwd - update authentication tokens
     ```Bash
     passwd demouser
     ```
@@ -133,12 +133,12 @@
 
 ### Adding and Deleting Groups
 -   Adding
-    -   groupadd
+    -   groupadd - create a new group
     ```Bash
     groupadd demogroup
     ```
 -   Deleting
-    -   groupdel
+    -   groupdel - delete a group
     ```Bash
     groupdel demogroup
     ```
@@ -146,11 +146,11 @@
 
 
 ### Modifying Groups
--   groupmod
+-   groupmod - modify a group definition on the system
 ```Bash
 groupmod -g 7777
 ```
--   gpasswd
+-   gpasswd - administer /etc/group and /etc/gshadow
 ```Bash
 gpasswd demogroup
 gpasswd -a demouser demogroup
