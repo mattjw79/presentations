@@ -216,6 +216,7 @@ usermod -a -G demogroup demouser
 -   Binary file
 -   Accessed with the "last" command
 -   Show a history of user logins and system reboots
+
 ```Bash
 [root@linux log]# last
 root     pts/0        10.1.1.10        Wed Jul 26 09:10   still logged in
@@ -233,6 +234,7 @@ wtmp begins Tue Jul 25 21:04:50 2017
 -   Binary file
 -   Accessed with the "lastlog" command
 -   Shows the last login time for each user
+
 ```Bash
 [root@linux log]#  lastlog
 Username         Port     From             Latest
@@ -248,6 +250,7 @@ adm                                        **Never logged in**
 -   Text file
 -   Use tail/less/etc to access
 -   Contains login related log messages
+
 ```Bash
 [root@mattjw ~]# tail -f /var/log/secure
 Jul 26 14:25:52 linux saslauthd[23915]: pam_unix(smtp:auth): check pass; user unknown
