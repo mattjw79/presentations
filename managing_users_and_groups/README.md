@@ -268,6 +268,7 @@ Jul 26 14:27:46 linux sshd[54744]: pam_unix(sshd:session): session opened for us
 ### who and w Commands
 -   who
     -   Prints information about users currently logged in
+
     ```Bash
     [root@linux ~]# who
     root     pts/0        2017-07-26 14:27 (10.1.1.10)
@@ -275,6 +276,7 @@ Jul 26 14:27:46 linux sshd[54744]: pam_unix(sshd:session): session opened for us
     ```
 -   w
     -   Prints who is logged in and what they are doing
+
     ```Bash
     [root@mattjw ~]# w
      15:47:36 up 42 days,  7:08,  1 user,  load average: 0.00, 0.01, 0.05
