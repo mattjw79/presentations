@@ -22,6 +22,9 @@
     -   Username
     -   Password
 
+Notes: A user account is a collection of a person's files, resources and other
+information. This collection is represented by a username and password.
+
 
 
 ## Login Process and Files
@@ -45,6 +48,12 @@
     -   umask
 -   Start user's shell
 
+Notes: When logging into the Linux environment on a command console, the user
+is prompted to input their username and their password (which is not
+displayed). Once the username and password are verified correct, the user's
+environment is created with the user's ID, group ID, variables, ulimit and
+umask. Last, the shell that is defined for the user is started.
+
 
 
 ### Passwd File
@@ -57,6 +66,12 @@
     -   Home directory
     -   Command interpreter (Shell)
 
+Notes: The /etc/passwd file is a colon (":") separated file. It contains the
+user's login name, a password field that is no longer used, the numerical user
+ID and group ID. The last three fields are the comment field, the path to the
+user's home directory and the path to the command interpreter. The comment
+field can be further divided using commas (',').
+
 
 
 ### Group File
@@ -65,6 +80,12 @@
     -   Optional password
     -   Group ID
     -   User list
+
+Notes: The /etc/group file is also a colon (":") separated file. The field
+order is group name, an optional password, a numerical group ID and finally,
+a comma separated member list. Theoretically, there is no limit to the number
+of users that can belong to one group. However, all users in that group must
+exist on the same line.
 
 
 
@@ -78,7 +99,15 @@
     -   Password warning period
     -   Password inactivity period
     -   Account expiration date
-    -   Reservered
+    -   Reserved
+
+Notes: As with the passwd and group files, the /etc/shadow file continues the
+tradition of colon separated. After the login name, there's a hashed (NOT
+encrypted) password. Along with that, the remaining data on each line deals
+with when the password was last changed, the minimum and maximum password age,
+how many days before the password expires to warn the user, how long after the
+expiration date the password should be accepted, the expiration date of the
+password, and the last field is reserved for future use.
 
 
 
@@ -102,6 +131,13 @@
         ```
     -   Does not remove user's home directory by default
 
+Notes: Adding a user is done with the "useradd" command. Using this command,
+the /etc/passwd, /etc/shadow and sometimes the /etc/group files are modified.
+The /etc/default/useradd file is used to provide default values to the useradd
+command where needed. Removing a user is done with the "userdel" command. By
+default, the userdel command does not remove the user's home directory. In
+order to remove the user's directory as well, use the option "-r" or "--remove".
+
 
 
 ### Modifying Users
@@ -123,6 +159,12 @@
     passwd demouser
     ```
 
+Notes: There are several commands to make changes to a user's account. The
+"usermod" command covers most of the changes that need to be made. The other
+commands allow changes to the "finger" information (comment data about the
+user), changing the login shell and the passwd command to update the user's
+password.
+
 
 
 ## Group Management
@@ -143,12 +185,16 @@
     groupdel demogroup
     ```
 
+Notes: The commands for adding and removing groups are similar to the user
+management commands. Both the groupadd and groupdel commands modify the
+/etc/group file.
+
 
 
 ### Modifying Groups
 -   groupmod - modify a group definition on the system
 ```Bash
-groupmod -g 7777
+groupmod -g 7777 demogroup
 ```
 -   gpasswd - administer /etc/group and /etc/gshadow
 ```Bash
@@ -160,6 +206,9 @@ gpasswd -d demouser demogroup
 ```Bash
 usermod -a -G demogroup demouser
 ```
+
+Notes: When adding a user to a group, rather than a "group" command, the
+usermod command is used.
 
 
 
