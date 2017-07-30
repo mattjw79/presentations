@@ -148,7 +148,7 @@ order to remove the user's directory as well, use the option "-r" or "--remove".
     ```
 -   chfn - change "finger" information
     ```Bash
-    chfn -f \"Demo User\" demouser
+    chfn -f "Demo User" demouser
     ```
 -   chsh - change login shell
     ```Bash
