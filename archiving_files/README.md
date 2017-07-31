@@ -111,7 +111,7 @@ under the least load.
 
 Notes: Backups are extremely situation dependent. When deciding what to backup
 on a system, you must take into account any user data files, configuration
-files, log files or even application specific files. 
+files, log files or even application specific files.
 
 
 
@@ -122,6 +122,10 @@ files, log files or even application specific files.
     -   Copy Into or Out of an archive
 -   dd
     -   Data Duplicator
+
+Notes: The most common Linux backup utilities are tar, cpio and dd. The tar and
+cpio commands both package multiple files into a single archive. The dd command
+copies all or part of a file to a new location.
 
 
 
@@ -134,6 +138,13 @@ tar -czvf /path/to/archive.tar.gz list of files
 ```
 -   Files can be appended or updated in tar archive
 -   Using the "-d" option, you can compare the files in the archive with system files
+
+Notes: The tar command packages a list of files into a single archive. A
+compressed archive file is called a tarball. An archive file can be compressed
+using an option to the tar command or after the archive has been created. Once
+an archive file has been created, files can be updated and/or deleted from the
+archive. If needed, the files within the archive can be compared to the system
+files using the "-d" option.
 
 
 
@@ -150,6 +161,11 @@ tar -xvf /path/to/archive.tar
 tar -xvf /path/to/archive.tar list of files
 ```
 
+Notes: When extracting files from an archive using the tar command, a subset of
+of the files or the entire set of files can be extracted. Any files restored
+will overwrite any files of the same name on the system. To compress the
+archive as it is created, the "-z" or the "-j" option can be used.
+
 
 
 ### The cpio Command
@@ -159,6 +175,10 @@ tar -xvf /path/to/archive.tar list of files
 -   Use the "-o" option to create an archive
 -   Use the "-i" option to extract from an archive
 
+Notes: Like the tar command, the cpio command can be used to package multiple
+files into a single archive. However, when using cpio, it does not descend into
+directories.
+
 
 
 ### The dd Command
@@ -167,3 +187,9 @@ tar -xvf /path/to/archive.tar list of files
 -   The "of" option is the destination file
 -   Can be used to copy partitions or entire disk
 -   Allows partial file copies
+
+Notes: Unlike the tar and cpio commands, the dd command does not package
+multiple files into a single archive. Instead, dd copies a file to another
+location using records. The file that dd copies can be a single file or a file
+that contains an entire file system; such as a device file for a disk or
+partition.
