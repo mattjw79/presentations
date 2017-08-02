@@ -20,24 +20,41 @@
     -   Complex
     -   Repetitive
 
+Notes: A shell script is a collection of commands that accomplish a specific
+task. They can be used for automating mundane, complex and/or repetitive tasks.
+Once a script is written, it can be used to complete that same task as many
+times as needed.
+
 
 
 ### Executing Shell Scripts
--   Add the execute permission and run the script directly
 -   Run the script as an argument to a interpreter
+-   Add the execute permission and run the script directly
 -   A script can be called with a
     -   Relative path
     -   Absolute path
--   Scripts can be called directly, if the script is in a directory specified
+-   Scripts can be called directly if the script is in a directory specified
     in the PATH
+
+Notes: When executing a shell script, if the script file does not have the
+execute permission assigned, it can be run as an argument to the interpreter.
+For example, "bash /path/to/script.file" would run the script using the Bash
+interpreter. If the script file is given the execute permission, that same
+example could be run as "/path/to/script.file" without having to specify the
+interpreter. Likewise, if the script is stored in a directory that is part of
+the PATH and has the execute permission, the script can be run by typing in
+just "script.file".
 
 
 
 ### Components of a Shell Script
--   The hash-bang #!
+-   The hash-bang "#!""
 -   Comments - lines starting with "#"
 -   Commands - simple or complex
 -   Exit Code
+
+Notes: Proper shell scripts always start with the hash-bang, then have any
+number of comments and/or commands. Then end with an exit code.
 
 
 
@@ -46,6 +63,10 @@
 -   Determines the interpreter to be used for the script
 -   Is used when running the script directly
 -   Specify any interpreter options
+
+Notes: The hash-bang, also known as "shebang", describes the interpreter to be
+used and any options that should apply to that interpreter. The hash-bang is
+only used when the script is not an argument to an interpreter.
 
 
 
