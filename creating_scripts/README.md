@@ -53,7 +53,7 @@
 -   Comments in Bash shell scripts start with a hash ("#")
 -   Can be specified after commands
 -   Should help explain
-    -   What commands are attempting to Accomplish
+    -   What commands are attempting to accomplish
     -   Why commands are being run
 
 
@@ -92,7 +92,7 @@ when setting a variable's value, the "$" is not used.
 -   Exit code of zero is success
 -   Non-zero exit codes are failures
 -   Previous command's exit code is stored in the "?" variable
--   Set using "exit <code>" at the end of a script
+-   Set using "exit \<code\>" at the end of a script
 
 
 
