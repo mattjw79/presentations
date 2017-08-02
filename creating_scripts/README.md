@@ -77,6 +77,12 @@ only used when the script is not an argument to an interpreter.
     -   What commands are attempting to accomplish
     -   Why commands are being run
 
+Notes: Comments do not affect how a script runs. The interpreter ignores any
+text on the same line which occurs after the hash sign. Comments can be used
+for many reasons but typically the most helpful comments are those that
+describe what a command or commands are attempting to accomplish, or, why
+the commands are being run.
+
 
 
 #### Commands
