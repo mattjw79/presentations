@@ -392,7 +392,7 @@ order, and the commands inside are executed.
 ## Shortcuts
 -   [Key Combinations](#key-combinations)
 -   [Shell Expansions](#shell-expansions)
--   History
+-   [History](#history)
 
 
 
@@ -472,6 +472,49 @@ Notes: The tilde expansion is typically used as a shortcut to a users home
 directory. Used by itself, it expands to the current users home directory. If
 paired with either the plus or minus sign it expands to the contents of the
 PWD or OLDPWD variable respectively.
+
+
+
+### Shell Parameter and Variable Expansion
+-   The "$" character signals a parameter or variable expansion
+-   Simplest form: $VAR_NAME
+    -   Indicates that the contents of the variable "VAR_NAME" should be
+        expanded
+    -   Cannot be used with trailing characters
+-   Curly braces should be used around the name, such as ${VAR_NAME}
+    -   Delineates start and end of the variable name
+    -   Allows the use of trailing characters
+-   Variables that have not previously been defined are considered an empty
+    string
+-   Using the following will set a value for the variable if it has not been
+    previously defined: ${VAR:=value}
+
+Notes:
+
+
+
+### History
+-   Bash, by default, keeps a list of commands previously typed
+-   Uses multiple variables to define settings
+-   Usually stored in the ~/.bash_history file, which is defined by HISTFILE
+-   Loaded from HISTFILE when Bash is started
+-   Saved back to HISTFILE when Bash is closed
+-   Use the "history" command to print out the list of commands previously used
+-   History shortcuts
+    -   !! - Specifies the most recent command in history
+    -   !n - Where "n" is a number, specifies the command in position "n"
+    -   !s - Where "s" is a string, specifies the more recent command starting
+        with the string
+
+Notes: The Bash history is extremely useful when needing to recall commands
+previously executed. Typically, the history data is stored in the user's home
+directory under the name .bash_history and is loaded into memory when the shell
+is started and saved to the file when bash is exited. To configure the Bash
+history, there are several variables involved. The most commonly modified
+variables are HISTSIZE and HISTCONTROL. The command "history" will print the
+list of commands previously typed along with the command number. To access a
+specific command by number, use the "!n" history shortcut where the "n" is the
+number of the command displayed.
 
 
 
