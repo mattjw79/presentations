@@ -142,7 +142,7 @@ cannot be ignored.
 -   Use the "kill" command to send a signal to a process
 -   The default signal for the kill command is SIGTERM (15)
 -   The SIGKILL (9) and SIGSTOP (19) cannot be ignored
--   Use "kill -9 [pid]" to forcefully terminate a process
+-   Use "kill -9 \[pid\]" to forcefully terminate a process
     -   Use sparingly as the process is not allowed to cleanup resources
 
 Notes: The "kill" command is used to send a signal to a process. It can be
