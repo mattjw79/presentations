@@ -93,6 +93,11 @@ the commands are being run.
     -   Compound Commands
 -   The stdout and stderr become part of stdout and stderr of the script
 
+Notes: A script can contain any command that can be run on the command line,
+including complex commands. When commands are run within a script, the
+standard output and standard error become part of the standard output and/or
+error of the script.
+
 
 
 #### Variables
@@ -121,6 +126,13 @@ when setting a variable's value, the "$" is not used.
 -   Previous command's exit code is stored in the "?" variable
 -   Set using "exit \<code\>" at the end of a script
 
+Notes: All scripts and programs return a numerical status code. A code of zero
+indicates that the command completed successfully and any other code indicates
+the script failed. When a command exits, the status code is stored in the ?
+variable until another command completes. To specify the exit status code for
+a script, use the exit command. By default, the exit status of the script is
+zero, or success.
+
 
 
 ### Reading Input from Users
@@ -134,6 +146,11 @@ string to capture
 string to capture
 ```
 
+Notes: When scripts need user intervention to make a decision, we can use the
+"read" command to prompt the user for input. The read command stores the input
+in a specified variable for retrieval later on. By default, read will read the
+users input up to the first newline character.
+
 
 
 ### Control Structures
@@ -144,6 +161,10 @@ string to capture
     -   while
     -   until
     -   for
+
+Notes: Simple automation can be done with a script that just runs commands
+sequentially. However, for more complex automation, scripts will need to be
+able to make decisions and be able to repeat blocks of commands.
 
 
 
@@ -157,6 +178,11 @@ else
   echo "Are you nuts? What kind of math are you using?"
 fi
 ```
+
+Notes: With the if/then/else statement, the block of commands directly after
+the "then" will be executed providing the condition is true. Optionally, when
+the condition is false, the block of commands after the "else" will be executed
+instead. To close the if statement, use the word "fi".
 
 
 
@@ -180,6 +206,10 @@ case ${CURRDATE} in
 esac
 ```
 
+Notes: The "case" statement is similar to an if/then/else statement but it can
+decide between multiple items. In the example, the script would advise having
+a jacket between the months of Oct. through March.
+
 
 
 #### while
@@ -191,6 +221,10 @@ while [[ ${COUNT} -lt 10 ]]; do
   COUNT=$((${COUNT}+1))  # Increment COUNT by one
 done
 ```
+
+Notes: A while loop can run through a block of commands multiple times. It
+will run the block of commands as long as the condition is true. Be aware that
+if the condition never changes to false, then the loop will run forever.
 
 
 
@@ -204,6 +238,12 @@ until [[ ${COUNT} -lt 0 ]]; do
 done
 ```
 
+Notes: Similar to the while loop, the until loop will also run through a block
+of commands multiple times. However, for the until command to run through the
+block of commands, the condition must be false. Once the condition turns to
+true, the loop will no longer run. In this case, if the condition never changes
+to true, the loop will run forever.
+
 
 
 #### for
@@ -211,6 +251,12 @@ done
 -   Passed in elements are space separated
 ```Bash
 for i in one two three four; do
+  echo "Howdy"
   echo ${i}
 done
 ```
+
+Notes: The for loop is similar to the while and until loops only in that it
+will also run through a block of commands multiple times. However, with the
+for loop, it runs through those commands once for each of the items passed into
+the loop.
