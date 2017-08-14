@@ -384,10 +384,53 @@ the dollar-square-bracket format is preferred.
     3.  The diff command compares the contents of file1 and the file descriptor
         representing the output for the command "sort file2"
 
+Notes: Process substitution creates an anonymous pipe for the stdout or stdin
+of a command so that it may be accessed like a file. In the example given,
+assume that "file1" is a sorted list of names and "file2" is an unsorted list
+of names. Without process substitution, "file2" would need to be sorted and
+saved as another file before being able to (sanely) compare the two files. With
+process substitution, the output of the sort command can be used to compare
+with "file1".
+
 
 
 ### Word Splitting
+-   Similar to when a command is split into tokens
+-   Results or expansions are split on the contents of $IFS (Internal Field Separator)
+    -   Parameter expansion
+    -   Command substitution
+    -   Arithmetic expansion
+-   Null arguments are passed to commands as empty strings
+-   If no expansion occurs, no word splitting is performed
+
+Notes: Once the parameter expansions, command substitutions and arithmetic
+expansions have completed, the expanded text is split into tokens based on the
+characters contained in the IFS variable. Any null arguments are passed to the
+commands as empty strings. This step will only be executed if an expansion has
+occurred, otherwise, it is an unneeded step.
 
 
 
 ### File Name Expansion
+-   Happens after all word splitting is complete
+-   Bash looks for any of the following:
+    -   "*" - expands to zero or more characters
+    -   "?" - expands to exactly one character
+    -   "[" - expands once to any of the characters between brackets
+-   All matches are included in expansion
+```Bash
+[user@example ~]$ ls
+dir1      dir2      file1       file2     file3
+[user@example ~]$ echo file?
+file1 file2 file3
+[user@example ~]$ echo file[13]
+file1 file3
+```
+
+Notes: The last step before the command is executed is to expand file names.
+This step looks for special characters and expands them to file names that
+match. The asterisk matches zero or more characters, the question mark matches
+exactly one character and the open and close square brackets list possible
+matches for a single character. All file names that match the pattern will be
+listed in the expansion, so if a pattern matches five file (or directory) names
+then all five file names will be included.
