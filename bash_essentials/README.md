@@ -4,113 +4,82 @@
 
 
 ## Overview
--   [What is Bash?](#what-is-bash)
--   [Shell Operation](#shell-operation)
--   [Special Characters and Quotes](#special-characters-and-quotes)
--   [Working in the Shell](#working-in-the-shell)
--   [Shortcuts](#shortcuts)
--   [References](#references)
+-   What is Bash?
+-   Using a Shell
+-   Quoting and Escaping
+-   Expansions
+-   Redirections
+-   Shortcuts
 
 
 
-## What is Bash?
--   Command line interpreter
+### What is Bash?
 -   Bourne-Again Shell
+-   Command line interpreter
 -   Executes commands
-    -   Standard input or terminal
+    -   Terminal or standard input
     -   Script file
 
-Notes: Bash is an acronym for Bourne-Again Shell and it is a command line
-interpreter. Bash provides a configurable environment to allow the user to
-interact with the kernel to accomplish tasks. The Bash shell is an enhancement
-to the Bourne Shell (sh) and commands that work with the Bourne Shell will
-also work in the Bash shell.
+Notes: Bash is an acronym for Bourne-Again Shell. It is a command line
+interpreter that provides a configurable environment to allow the user to
+interact with the kernel to accomplish tasks. This interaction can be
+accomplished through manual interaction such as typing in commands and waiting
+for output or through a shell script that automates running multiple commands.
 
 
 
-## Shell Operation
-1.  Reads input from terminal, arguments or file
-2.  Breaks input into words and operators known as tokens
-3.  Parses the tokens into simple and compound commands
-4.  Performs shell expansions
-5.  Performs necessary redirections
-6.  Executes the command
-7.  Optionally waits for the command to complete
-
-Notes: This is a high level view of how the Bash shell executes the commands
-given to it. At this point, you don't need to completely understand each of
-the steps in depth. Just keep them in mind as we fill out the details in the
-coming slides.
+## Using a Shell
+-   Prompt
+-   Syntax
+-   Simple Commands
+-   Pipelines
+-   Lists of Commands
+-   Compound Commands
 
 
 
-## Special Characters and Quotes
--   [Escape Character](#escape-character)
--   [Single Quotes](#single-quotes)
--   [Double Quotes](#double-quotes)
--   [Pound Sign (Hash)](#pound-sign-hash)
-
-
-
-### Escape Character "\\" (backslash)
--   Prevents the shell from interpreting the next character
--   The "\\newline" sequence is effectively ignored
-    -   Allows the command to be continued on more than one line
+### Prompt
+-   Default prompt contains
+    -   Username
+    -   Hostname
+    -   Base name of current directory
+    -   User level indication
+-   Normal user
 ```Bash
-./configure --prefix=/sw/pkg/apache \
-  --enable-ldap=shared \
-  --enable-lua=shared
+[user1@example ~]$
+```
+-   Super user
+```Bash
+[root@example ~]#
 ```
 
-Notes: The escape character is used to keep bash from using the special
-operations of certain characters; such as "$", "!", "\`" and even "\\"
-itself. The escape character can also be used to continue a command on more
-than one line.
+Notes: The default prompt contains multiple useful pieces of information. It
+shows the username of the current user, the hostname, the base name of the
+current directory and also has a user level indicator. The user level indicator
+is found at the end of the prompt as either a "$" for a normal user or as a "#"
+for a super user (or root user).
 
 
 
-### Single Quotes
--   Prevents the shell from interpreting the characters between two single
-    quotes
--   The backslash does not function as an escape character in a single
-    quoted string
+### Syntax
+-   Commands are white-space separated
+-   When running a command, the shell
+    1.  Reads input from terminal, arguments or file
+    2.  Breaks input into words and operators known as tokens
+    3.  Parses the tokens into simple and compound commands
+    4.  Performs shell expansions
+    5.  Performs necessary redirections
+    6.  Executes the command(s)
+    7.  Optionally waits for the command(s) to complete
 
-Notes: Single quoted strings are not interpreted by the shell, which means
-there is no need to escape the special characters within the string. This also
-means that the single quote character cannot be used within a single quoted
-string.
-
-
-
-### Double Quotes
--   Prevents the shell from interpreting most characters between two sets
-    of double quotes
--   The special characters "$", "\`", "\\" and "!" retain their special
-    meaning
-
-Notes: Double quoted strings allow the "$", "\`", "\\" and "!" characters to
-retain their special meanings. A double quoted string can contain the double
-quote character within the string but it must be escaped.
-
-
-
-### Pound Sign (Hash)
--   All characters after the "#" and before the newline are ignored by the
-    shell
--   Effectively makes anything on the line after "#" a comment
-
-Notes: The pound sign (or hash mark) is used to allow comments on the shell or
-within shell scripts. The comments are not considered part of the command
-string when executing but they are stored within the history. This is useful
-for documenting why a command was run or what the command was expected to do.
-
-
-
-## Shell Commands
--   [Simple Commands](#simple-commands)
--   [Pipelines](#pipelines)
--   [Lists of Commands](#lists-of-commands)
--   [Compound Commands](#compound-commands)
+Notes: When commands are entered in the Bash shell, there are several steps
+that those commands must go through before they are actually executed. The
+input is first read in from the terminal, then broken into words and operators.
+Then the shell parses the tokens into simple and compound commands, performs
+any shell expansions and redirections. Lastly, the shell executes the command or
+commands and optionally waits for the commands to complete. When entering
+commands into the shell, the different parts of the command are white space
+separated.
 
 
 
@@ -128,8 +97,9 @@ mount /dev/cdrom /mnt
 ```
 
 Notes: Simple commands are the most common for an interactive shell session.
-These are single command strings with a command followed by options and/or
-arguments. These are usually designed to complete a specific task.
+These are single command strings that contain a command followed by options
+and/or arguments. These simple commands are usually designed to complete a very
+specific task such as copying a file or creating a directory.
 
 
 
@@ -145,10 +115,10 @@ command1 |& command2 [ |& commandx ]
 ```
 
 Notes: Pipelines give the user the ability to process the output of one command
-with another command. This allows the user to do things like search for a
-specific string in the output of another command. When running commands in a
-pipeline, each command is started at the same time and the shell waits for all
-commands to complete.
+with another command. For example, this allows a user search for a specific
+string in the output of another command. When running commands in a pipeline,
+each command is started at the same time and the shell waits for all commands
+to complete before returning to the prompt.
 
 
 
@@ -196,248 +166,96 @@ current shell context.
 
 
 
-## Working in the Shell
--   [Prompt](#prompt)
--   [Variables](#variables)
--   [Environment](#environment)
--   [Initialization Files](#initialization-files)
+## Quoting and Escaping
+-   Escape Character
+-   Double Quotes
+-   Single Quotes
+-   Comment Character
 
 
 
-### Prompt
--   Default prompt contains
-    -   Username
-    -   Hostname
-    -   Base name of current directory
-    -   User level indication
--   Normal user
+### Escape Character
+-   Backslash ("\\")
+-   Prevents the shell from interpreting the next character
+-   The "\\newline" sequence is effectively ignored
+    -   Allows the command to be continued on more than one line
 ```Bash
-[user1@example ~]$
-```
--   Super user
-```Bash
-[root@example ~]#
+./configure --prefix=/sw/pkg/apache \
+  --enable-ldap=shared \
+  --enable-lua=shared
 ```
 
-Notes: The default prompt contains multiple useful pieces of information. It
-shows the username of the current user, the hostname, the base name of the
-current directory and also has a user level indicator. The user level indicator
-is found at the end of the prompt as either a "$" for a normal user or as a "#"
-for a super user (or root user).
+Notes: The escape character is used to keep bash from using the special
+meaning of certain characters; such as "$", "!", "\`" and even "\\"
+itself. The escape character can also be used to continue a command on more
+than one line.
 
 
 
-### Variables
--   variable: "apt or liable to vary or change; changeable" - dictionary.com
--   Named location to temporarily store information
--   Bash has several variables already defined
--   Names can contain a-z, A-Z, 0-9 and the underscore ("\_")
--   Names can NOT begin with 0-9
--   Setting/unsetting a variable will never include a "$"
--   Using a variable will always include a "$" before the name
+### Double Quotes
+-   Prevents the shell from interpreting most characters between two sets
+    of double quotes
+-   The special characters "$", "\`", "\\" and "!" retain their special
+    meaning
 
-Notes: Dictionary.com defines "variable" as something "apt or liable to vary or
-change; changeable". A Bash shell variable is just a named location to store
-temporary information. When creating a variable, the name can be upper or lower
-case, can contain only letters, numbers and underscores but cannot start with
-a number. When using variables a "$" will always precede the variable name but
-when setting a variable's value, the "$" is not used.
+Notes: Double quoted strings allow the "$", "\`", "\\" and "!" characters to
+retain their special meanings. The escape character can be used to escape any
+of these characters so that they are not interpreted. The escape character can
+be used with a double quote to include a double quote within a double quoted
+string.
 
 
 
-### Variables (cont.)
--   Setting a variable takes the following form
-```Bash
-VAR_NAME="value or data"
-```
--   Export variables to make them available to subprocesses
-```Bash
-export VAR_NAME="value or data"
-```
--   An example of using a variable
-```Bash
-echo $HOME
-echo ${HOME}
-```
+### Single Quotes
+-   Prevents the shell from interpreting the characters between two single
+    quotes
+-   The backslash does not function as an escape character in a single
+    quoted string
 
-Notes: When setting a variable, use the form of variable name, an equals sign,
-then the data to be stored in the variable. There should NOT be spaces around
-the equals sign and if the data contains spaces it should be quoted. To make
-the variable available to subprocesses of the shell, use the "export" keyword
-and the variable name. This can be done when assigning a value to the variable
-or after the value has been assigned. Lastly, to use a variable, the variable
-name needs to be prefixed with the "$". Optionally, the variable name can be
-enclosed in curly braces which signify the beginning and the end of the
-variable name.
+Notes: Single quoted strings are not interpreted by the shell, which means
+there is no need to escape the special characters within the string. This also
+means that the single quote character cannot be used within a single quoted
+string.
 
 
 
-### Environment
--   Configured globally and on a per user basis
--   Consists of
-    -   Shell options
-    -   Variables
-    -   Functions
-    -   Aliases
+### Comment Character
+-   All characters after the "#" and before the newline are ignored by the
+    shell
+-   Effectively makes anything on the line after "#" a comment
 
-Notes: The Bash environment allows for global and per user configuration. The
-environment consists of preset shell options, variables, functions and aliases.
-Each of these items can be configured independently.
+Notes: The pound sign (or hash mark) is used to allow comments on the shell or
+within shell scripts. The comments are not considered part of the command
+string when executing but they are stored within the history. This is useful
+for documenting why a command was run or what the command was expected to do.
 
 
 
-### Environment - Shell Options
--   Shell options define the behavior of the Bash shell
--   Defined using the "set" command
--   Turn on an option using the "+" and off using the "-"
--   Examples
-    -   Prevent overwriting of existing files
-    ```Bash
-    set +o noclobber
-    ```
-    -   Disable command history
-    ```Bash
-    set -o history
-    ```
-    -   Show full execution command
-    ```Bash
-    set +x
-    set +o xtrace
-    ```
+## Expansions
+1.  Brace Expansion
+2.  Tilde Expansion
+3.  Shell Parameter Expansion
+4.  Command Substitution
+5.  Arithmetic Expansion
+6.  Process Substitution
+7.  Word Splitting
+8.  Filename Expansion
 
-Notes: The shell options help to define how the Bash shell behaves and can be
-modified using the "set" command. When setting options, prefix the option with
-a "+" to turn the option on and a "-" to turn the option off.
-
-
-
-### Environment - Variables
--   Environment variables are essentially shell variables
--   Most can be displayed using the "env" command
--   Commonly modified
-    -   PATH = List of paths to search for executables
-    -   PS1 = Prompt definition
-    -   HISTSIZE = Max number of commands to keep in the history list
-    -   TERM = Terminal type and features
-
-Notes: Environment variables are shell variables that are set on startup. They
-work similarly to the shell options but are subject to change and/or be used
-more often. Environment variables can be displayed using the "env" command.
-
-
-
-### Environment - Functions
--   Shell functions are a grouping of commands under one name
--   May accept parameters (arguments)
--   Returns an exit code
--   Two ways to define
-    ```Bash
-    function MyFunction { commands; }
-
-    MyFunction () { commands; }
-    ```
-
-Notes: Shell functions are a named grouping of commands to be run. These
-functions can accept positional parameters and will return an exit code when
-they complete. There are two ways to define a shell function but in either case
-the grouped commands will be enclosed within the curly braces. Once defined,
-functions can be executed just like a command.
-
-
-
-### Environment - Aliases
--   alias: "a false name used to conceal one's identity; an assumed name" - dictionary.com
--   A way to name a longer command string
-    ```Bash
-    alias df='df -h'
-    alias ext_du='date; time du -sh *'
-    ```
--   Aliases are expanded when a command is read, not when executed
--   Will NOT work as expected:
-    ```Bash
-    alias bad_alias='alias df="df -h"; df'
-    ```
--   Remove an alias with the built-in command "unalias"
-
-Notes: An alias in Bash is a way to give a name to another command string. To
-do so, use the built-in command "alias", then the name of the new alias
-followed by an equals sign and the command string (quoted) that should be run.
-Because aliases are expanded when the command is read and not when executed,
-when defining a new alias within another alias or function, the new alias will
-not be available within that same alias or function.
-
-
-
-### Initialization Files
--   Used to extend the default Bash startup behavior
--   Custom variables, aliases and functions are typically defined here
--   When executed as an interactive login shell (typical usage), reads the
-    following files (in order)
-    1.  /etc/profile
-    2.  ~/.bash_profile
-    3.  ~/.bash_login
-    4.  ~/.profile
--   Read as a script
--   RedHat based distributions and Mac tend to use ~/.bash_profile
--   Debian based distributions tend to use ~/.profile
-
-Notes: The Bash initialization files are used to extend the startup behavior of
-the shell. They can contain custom variables, aliases, functions and any other
-commands that may need to run upon the shell startup. When the Bash shell is
-started as an interactive login shell, the initialization files are read, in
-order, and the commands inside are executed.
-
-
-
-## Shortcuts
--   [Key Combinations](#key-combinations)
--   [Shell Expansions](#shell-expansions)
--   [History](#history)
-
-
-
-### Key Combinations
--   TAB key
-    -   Single press - attempt to complete depending on the starting character
-        of the current token
-    -   Double press - display all options for completion
--   Ctrl-c - cancel the current running process
--   Ctrl-a - Move to the beginning of the current line
--   Ctrl-e - Move to the end of the current line
--   Ctrl-f - Move the cursor forward one character
--   Ctrl-b - Move the cursor backward one character
--   Ctrl-l - Clear the screen
--   Ctrl-r - Search backward through history
--   Ctrl-s - Search forward through history
--   Ctrl-u - Clear the current line from the cursor to the beginning
-
-
-
-### Shell Expansions
-1.  [Brace Expansion](#brace-expansion)
-2.  [Tilde Expansion](#tilde-expansion)
-3.  [Shell Parameter and Variable Expansion](#shell-parameter-and-variable-expansion)
-4.  [Command Substitution](#command-substitution)
-5.  [Arithmetic Expansion](#arithmetic-expansion)
-6.  [Process Substitution](#process-substitution)
-7.  [Word Splitting](#word-splitting)
-8.  [File Name Expansion](#file-name-expansion)
-
-Notes: <http://tldp.org/LDP/Bash-Beginners-Guide/html/sect_03_04.html>
+Notes: There are eight different kinds of expansions that the Bash shell
+performs. After the shell breaks the command into tokens, each of the expansions
+are performed in order. Once all expansions have been completed, quote removal
+is performed and the command is executed.
 
 
 
 ### Brace Expansion
--   Brace expansions are the first expansion to be processed
 -   Allow the generation of an arbitrary number of strings
 -   Strings to be expanded are comma separated
     ```Bash
     [user@example ~]$ echo {one,two,three}
     one two three
-
     [user@example ~]$ echo {one,two,three}_potato
     one_potato two_potato three_potato
-
     [user@example ~]$ echo a_{one,two,three}_potato
     a_one_potato a_two_potato a_three_potato
     ```
@@ -450,7 +268,7 @@ Notes: Brace expansions are processed before all other expansions. Because of
 this, special characters contained within the braces are not interpreted with
 their special meanings at this stage. To avoid conflicts with a later shell
 expansion, if a curly brace is immediately preceded with a dollar sign, the
-brace expansions are not performed on the string(s) contained within.
+brace expansions are not performed on the string contained within.
 
 
 
@@ -459,7 +277,6 @@ brace expansions are not performed on the string(s) contained within.
     ```Bash
     [user@example ~]$ echo ~
     /home/user
-
     [user@example ~]$ echo ~user2
     /home/user2
     ```
@@ -475,50 +292,100 @@ PWD or OLDPWD variable respectively.
 
 
 
-### Shell Parameter and Variable Expansion
--   The "$" character signals a parameter or variable expansion
--   Simplest form: $VAR_NAME
-    -   Indicates that the contents of the variable "VAR_NAME" should be
-        expanded
-    -   Cannot be used with trailing characters
--   Curly braces should be used around the name, such as ${VAR_NAME}
-    -   Delineates start and end of the variable name
-    -   Allows the use of trailing characters
--   Variables that have not previously been defined are considered an empty
-    string
--   Using the following will set a value for the variable if it has not been
-    previously defined: ${VAR:=value}
+### Shell Parameter Expansion
+-   The "$" character starts
+    -   Parameter expansion (variables)
+    -   Command substitution
+    -   Arithmetic expansion
+-   Simple form or direct expansion is $PARAMETER or ${PARAMETER}
+    -   Value of $PARAMETER is substituted
+    -   Braces are optional but denote start and end of parameter string
+-   Indirect expansion is ${!B*}
+    ```Bash
+    [user@example ~]$ echo ${!B*}
+    BASH BASHOPTS BASHPID BASH_ALIASES BASH_ARGC BASH_ARGV BASH_CMDS BASH_COMMAND BASH_COMPLETION_COMPAT_DIR BASH_LINENO BASH_REMATCH BASH_SOURCE BASH_SUBSHELL BASH_VERSINFO BASH_VERSION
+    ```
+-   Creation of named variable if it does not already exist
+    ```Bash
+    [user@example ~]$ echo ${COUNT}
 
-Notes:
+    [user@example ~]$ echo ${COUNT:=0}
+    0
+    ```
 
-
-
-### History
--   Bash, by default, keeps a list of commands previously typed
--   Uses multiple variables to define settings
--   Usually stored in the ~/.bash_history file, which is defined by HISTFILE
--   Loaded from HISTFILE when Bash is started
--   Saved back to HISTFILE when Bash is closed
--   Use the "history" command to print out the list of commands previously used
--   History shortcuts
-    -   !! - Specifies the most recent command in history
-    -   !n - Where "n" is a number, specifies the command in position "n"
-    -   !s - Where "s" is a string, specifies the more recent command starting
-        with the string
-
-Notes: The Bash history is extremely useful when needing to recall commands
-previously executed. Typically, the history data is stored in the user's home
-directory under the name .bash_history and is loaded into memory when the shell
-is started and saved to the file when bash is exited. To configure the Bash
-history, there are several variables involved. The most commonly modified
-variables are HISTSIZE and HISTCONTROL. The command "history" will print the
-list of commands previously typed along with the command number. To access a
-specific command by number, use the "!n" history shortcut where the "n" is the
-number of the command displayed.
+Notes: Shell parameter expansions, or possibly better known as shell variables,
+act as a named storage for data. Using the simplest form, the parameter is
+replaced with it's contents in the command line. Indirect expansion is signaled
+by using the exclamation point before the parameter pattern. By default, if a
+parameter has not bee previously set, it will contain a null value. To override
+this behavior, specify ":=" and the value to be used after the parameter name.
 
 
 
-## References
--   [Bash Reference](https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents)
--   [Bash Beginners Guide](http://tldp.org/LDP/Bash-Beginners-Guide/html/index.html)
--   [Link to presentation on GitHub](https://github.com/mattjw79/presentations/tree/master/bash_essentials)
+### Command Substitution
+-   Two formats
+    -   Dollar-parens(preferred): $(command)
+    -   Backticks: \`command\`
+-   Can be nested (inner backticks must be escaped)
+```Bash
+[user@example ~]$ echo "Today is" $(date)
+Today is Mon Aug 14 10:33:00 EDT 2017
+[user@example ~]$ echo "Today is" \`date\`
+Today is Mon Aug 14 10:33:00 EDT 2017
+[user@example ~]$ echo "Today is $(date $(echo "+%A")), hooray!"
+Today is Monday, hooray!
+[user@example ~]$ echo "Today is \`date \\\`echo "+%A"\\\`\`, hooray!"
+Today is Monday, hooray!
+```
+
+Notes: Command substitution allows the output of a command or commands to be
+used in it's place. Of the two formats that are accepted for command
+substitution, the dollar-parens format is preferred over backticks due to
+easier readability and nesting.
+
+
+
+### Arithmetic Expansion
+-   Two formats
+    -   dollar-square-bracket format (preferred): $[expression]
+    -   dollar-double-parens format: $((expression))
+-   Operators are similar to the C programming language
+```Bash
+[user@example ~]$ COUNT=5; echo $[ ++COUNT ]  # pre-increment
+6
+[user@example ~]$ echo $[ 3 + 4 ]             # simple addition
+7
+[user@example ~]$ echo $[ $[ 5 + 3 ] * 7 ]    # compound
+56
+[user@example ~]$ echo $[ 4 ** 2 ]            # exponents
+16
+[user@example ~]$ echo $[ 4 > 5 ? 2 : 1 ]     # conditional evaluation
+1
+```
+
+Notes: Arithmetic expansion allows for the evaluation of an arithmetic
+expression and substitutes the result. The operators allowed are similar to the
+operators available in the C programming language. Of the two formats allowed,
+the dollar-square-bracket format is preferred.
+
+
+
+### Process Substitution
+-   Creates an anonymous pipe for the output or input of a command
+-   May be easiest with an example
+```Bash
+[user@example ~]$ diff file1 <(sort file2)
+```
+    1.  Creates an anonymous pipe for "sort file2"
+    2.  Sorts the contents of "file2" and the output is available as a file
+        descriptor
+    3.  The diff command compares the contents of file1 and the file descriptor
+        representing the output for the command "sort file2"
+
+
+
+### Word Splitting
+
+
+
+### File Name Expansion
