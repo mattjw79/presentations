@@ -328,17 +328,17 @@ this behavior, specify ":=" and the value to be used after the parameter name.
 -   Two formats
     -   Dollar-parens(preferred): $(command)
     -   Backticks: \`command\`
--   Can be nested (inner backticks must be escaped)
-  ```Bash
-  [user@example ~]$ echo "Today is" $(date)
-  Today is Mon Aug 14 10:33:00 EDT 2017
-  [user@example ~]$ echo "Today is" \`date\`
-  Today is Mon Aug 14 10:33:00 EDT 2017
-  [user@example ~]$ echo "Today is $(date $(echo "+%A")), hooray!"
-  Today is Monday, hooray!
-  [user@example ~]$ echo "Today is \`date \\\`echo "+%A"\\\`\`, hooray!"
-  Today is Monday, hooray!
-  ```
+-   Can be nested (inner backticks must be escaped when nested)
+```Bash
+[user@example ~]$ echo "Today is" $(date)
+Today is Mon Aug 14 10:33:00 EDT 2017
+[user@example ~]$ echo "Today is" \`date\`
+Today is Mon Aug 14 10:33:00 EDT 2017
+[user@example ~]$ echo "Today is $(date $(echo "+%A")), hooray!"
+Today is Monday, hooray!
+[user@example ~]$ echo "Today is \`date \\\`echo "+%A"\\\`\`, hooray!"
+Today is Monday, hooray!
+```
 
 Notes: Command substitution allows the output of a command or commands to be
 used in it's place. Of the two formats that are accepted for command
@@ -349,7 +349,7 @@ easier readability and nesting.
 
 ### Arithmetic Expansion
 -   Two formats
-    -   dollar-square-bracket format (preferred): $[expression]
+    -   dollar-square-bracket format (preferred): $\[expression\]
     -   dollar-double-parens format: $((expression))
 -   Operators are similar to the C programming language
 ```Bash
@@ -361,7 +361,7 @@ easier readability and nesting.
 56
 [user@example ~]$ echo $[ 4 ** 2 ]            # exponents
 16
-[user@example ~]$ echo $[ 4 > 5 ? 2 : 1 ]     # conditional evaluation
+[user@example ~]$ echo $[ 4 > 5 ? 2 : 1 ]     # conditional eval
 1
 ```
 
@@ -375,9 +375,9 @@ the dollar-square-bracket format is preferred.
 ### Process Substitution
 -   Creates an anonymous pipe for the output or input of a command
 -   May be easiest with an example
-```Bash
-[user@example ~]$ diff file1 <(sort file2)
-```
+    ```Bash
+    [user@example ~]$ diff file1 <(sort file2)
+    ```
     1.  Creates an anonymous pipe for "sort file2"
     2.  Sorts the contents of "file2" and the output is available as a file
         descriptor
