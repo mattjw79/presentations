@@ -303,7 +303,9 @@ PWD or OLDPWD variable respectively.
 -   Indirect expansion is ${!B*}
     ```Bash
     [user@example ~]$ echo ${!B*}
-    BASH BASHOPTS BASHPID BASH_ALIASES BASH_ARGC BASH_ARGV BASH_CMDS BASH_COMMAND BASH_COMPLETION_COMPAT_DIR BASH_LINENO BASH_REMATCH BASH_SOURCE BASH_SUBSHELL BASH_VERSINFO BASH_VERSION
+    BASH BASHOPTS BASHPID BASH_ALIASES BASH_ARGC BASH_ARGV BASH_CMDS
+    BASH_COMMAND BASH_COMPLETION_COMPAT_DIR BASH_LINENO BASH_REMATCH
+    BASH_SOURCE BASH_SUBSHELL BASH_VERSINFO BASH_VERSION
     ```
 -   Creation of named variable if it does not already exist
     ```Bash
@@ -327,16 +329,16 @@ this behavior, specify ":=" and the value to be used after the parameter name.
     -   Dollar-parens(preferred): $(command)
     -   Backticks: \`command\`
 -   Can be nested (inner backticks must be escaped)
-```Bash
-[user@example ~]$ echo "Today is" $(date)
-Today is Mon Aug 14 10:33:00 EDT 2017
-[user@example ~]$ echo "Today is" \`date\`
-Today is Mon Aug 14 10:33:00 EDT 2017
-[user@example ~]$ echo "Today is $(date $(echo "+%A")), hooray!"
-Today is Monday, hooray!
-[user@example ~]$ echo "Today is \`date \\\`echo "+%A"\\\`\`, hooray!"
-Today is Monday, hooray!
-```
+  ```Bash
+  [user@example ~]$ echo "Today is" $(date)
+  Today is Mon Aug 14 10:33:00 EDT 2017
+  [user@example ~]$ echo "Today is" \`date\`
+  Today is Mon Aug 14 10:33:00 EDT 2017
+  [user@example ~]$ echo "Today is $(date $(echo "+%A")), hooray!"
+  Today is Monday, hooray!
+  [user@example ~]$ echo "Today is \`date \\\`echo "+%A"\\\`\`, hooray!"
+  Today is Monday, hooray!
+  ```
 
 Notes: Command substitution allows the output of a command or commands to be
 used in it's place. Of the two formats that are accepted for command
