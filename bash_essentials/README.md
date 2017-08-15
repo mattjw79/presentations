@@ -8,7 +8,7 @@
 -   [Using a Shell](#using-a-shell)
 -   [Quoting and Escaping](#quoting-and-escaping)
 -   [Expansions](#expansions)
--   Redirections
+-   [Redirections](#redirections)
 -   Shortcuts
 
 
@@ -434,3 +434,31 @@ exactly one character and the open and close square brackets list possible
 matches for a single character. All file names that match the pattern will be
 listed in the expansion, so if a pattern matches five file (or directory) names
 then all five file names will be included.
+
+
+
+## Redirections
+-   Redirecting output
+    -   Sends stdout or stderr to a file
+    -   The ">" redirects stdout and overwrites or creates a file
+    -   The ">>" redirects stdout and appends to or creates a file
+    -   Redirect stderr using "2>" or "2>>"
+    -   Redirect both stdout and stderr to the same file using "&>" or "&>>"
+-   Redirecting input
+    -   Sends data to a command's stdin
+    -   The "<" redirects the contents of a file
+    -   The "<<" (or here document) reads input up to a delimiter specified
+
+Notes: Redirections are used for changing the output or input of a command to a
+specified file or string. When redirecting stdout or stderr, a single
+greater-than will create a new file or, if the file already exists, truncate
+the existing file effectively overwriting what was there. Using a double
+greater-than will create a new file or append to an existing file.
+
+
+
+## References
+-   [Bash Reference](https://www.gnu.org/software/bash/manual/html_node/index.html#SEC_Contents)
+-   [Bash Beginners Guide](http://tldp.org/LDP/Bash-Beginners-Guide/html/index.html)
+-   [Process Substitution (Wikipedia)](https://en.wikipedia.org/wiki/Process_substitution)
+-   [Link to presentation on GitHub](https://github.com/mattjw79/presentations/tree/master/bash_essentials)
