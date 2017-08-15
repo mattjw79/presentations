@@ -539,6 +539,7 @@ number of the command displayed.
     -   Single press - attempt to complete depending on the starting character
         of the current token
     -   Double press - display all options for completion
+-   Up/Down arrows - scroll through previous commands
 -   CTRL-c - cancel the current running process
 -   CTRL-a - Move to the beginning of the current line
 -   CTRL-e - Move to the end of the current line
