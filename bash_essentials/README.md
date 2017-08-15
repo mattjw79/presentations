@@ -4,10 +4,10 @@
 
 
 ## Overview
--   What is Bash?
--   Using a Shell
--   Quoting and Escaping
--   Expansions
+-   [What is Bash?](#what-is-bash)
+-   [Using a Shell](#using-a-shell)
+-   [Quoting and Escaping](#quoting-and-escaping)
+-   [Expansions](#expansions)
 -   Redirections
 -   Shortcuts
 
@@ -29,12 +29,12 @@ for output or through a shell script that automates running multiple commands.
 
 
 ## Using a Shell
--   Prompt
--   Syntax
--   Simple Commands
--   Pipelines
--   Lists of Commands
--   Compound Commands
+-   [Prompt](#prompt)
+-   [Syntax](#syntax)
+-   [Simple Commands](simple-commands)
+-   [Pipelines](#pipelines)
+-   [Lists of Commands](#lists-of-commands)
+-   [Compound Commands](#compound-commands)
 
 
 
@@ -167,10 +167,10 @@ current shell context.
 
 
 ## Quoting and Escaping
--   Escape Character
--   Double Quotes
--   Single Quotes
--   Comment Character
+-   [Escape Character](#escape-character)
+-   [Double Quotes](#double-quotes)
+-   [Single Quotes](#single-quotes)
+-   [Comment Character](#comment-character)
 
 
 
@@ -232,14 +232,14 @@ for documenting why a command was run or what the command was expected to do.
 
 
 ## Expansions
-1.  Brace Expansion
-2.  Tilde Expansion
-3.  Shell Parameter Expansion
-4.  Command Substitution
-5.  Arithmetic Expansion
-6.  Process Substitution
-7.  Word Splitting
-8.  Filename Expansion
+1.  [Brace Expansion](#brace-expansion)
+2.  [Tilde Expansion](#tilde-expansion)
+3.  [Shell Parameter Expansion](#shell-parameter-expansion)
+4.  [Command Substitution](#command-substitution)
+5.  [Arithmetic Expansion](#arithmetic-expansion)
+6.  [Process Substitution](#process-substitution)
+7.  [Word Splitting](#word-splitting)
+8.  [Filename Expansion](#filename-expansion)
 
 Notes: There are eight different kinds of expansions that the Bash shell
 performs. After the shell breaks the command into tokens, each of the expansions
