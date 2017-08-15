@@ -9,7 +9,7 @@
 -   [Quoting and Escaping](#quoting-and-escaping)
 -   [Expansions](#expansions)
 -   [Redirections](#redirections)
--   Shortcuts
+-   [Shortcuts](#shortcuts)
 
 
 
@@ -454,6 +454,106 @@ specified file or string. When redirecting stdout or stderr, a single
 greater-than will create a new file or, if the file already exists, truncate
 the existing file effectively overwriting what was there. Using a double
 greater-than will create a new file or append to an existing file.
+
+
+
+## Shortcuts
+-   [Aliases](#aliases)
+-   [Initialization Files](#initialization-files)
+-   [History](#history)
+-   [Key Combinations](#key-combinations)
+
+
+
+### Aliases
+-   alias: "a false name used to conceal one's identity; an assumed name" - dictionary.com
+-   A way to name a longer command string
+    ```Bash
+    alias df='df -h'
+    alias ext_du='date; time du -sh *'
+    ```
+-   Aliases are expanded when a command is read, not when executed
+-   Will NOT work as expected:
+    ```Bash
+    alias bad_alias='alias df="df -h"; df'
+    ```
+-   Remove an alias with the built-in command "unalias"
+
+Notes: An alias in Bash is a way to give a name to another command string. To
+do so, use the built-in command "alias", then the name of the new alias
+followed by an equals sign and the command string (quoted) that should be run.
+Because aliases are expanded when the command is read and not when executed,
+when defining a new alias within another alias or function, the new alias will
+not be available within that same alias or function.
+
+
+
+### Initialization Files
+-   Used to extend the default Bash startup behavior
+-   Custom variables, aliases and functions are typically defined here
+-   When executed as an interactive login shell (typical usage), reads the
+    following files (in order)
+    1.  /etc/profile
+    2.  ~/.bash_profile
+    3.  ~/.bash_login
+    4.  ~/.profile
+-   Read as a script
+-   RedHat based distributions and Mac tend to use ~/.bash_profile
+-   Debian based distributions tend to use ~/.profile
+
+Notes: The Bash initialization files are used to extend the startup behavior of
+the shell. They can contain custom variables, aliases, functions and any other
+commands that may need to run upon the shell startup. When the Bash shell is
+started as an interactive login shell, the initialization files are read, in
+order, and the commands inside are executed.
+
+
+
+### History
+-   Bash, by default, keeps a list of commands previously typed
+-   Uses multiple variables to define settings
+-   Usually stored in the ~/.bash_history file, which is defined by HISTFILE
+-   Loaded from HISTFILE when Bash is started
+-   Saved back to HISTFILE when Bash is closed
+-   Use the "history" command to print out the list of commands previously used
+-   History shortcuts
+    -   !! - Specifies the most recent command in history
+    -   !n - Where "n" is a number, specifies the command in position "n"
+    -   !s - Where "s" is a string, specifies the more recent command starting
+        with the string
+
+Notes: The Bash history is extremely useful when needing to recall commands
+previously executed. Typically, the history data is stored in the user's home
+directory under the name .bash_history and is loaded into memory when the shell
+is started and saved to the file when bash is exited. To configure the Bash
+history, there are several variables involved. The most commonly modified
+variables are HISTSIZE and HISTCONTROL. The command "history" will print the
+list of commands previously typed along with the command number. To access a
+specific command by number, use the "!n" history shortcut where the "n" is the
+number of the command displayed.
+
+
+
+### Key Combinations
+-   TAB key
+    -   Single press - attempt to complete depending on the starting character
+        of the current token
+    -   Double press - display all options for completion
+-   CTRL-c - cancel the current running process
+-   CTRL-a - Move to the beginning of the current line
+-   CTRL-e - Move to the end of the current line
+-   CTRL-f - Move the cursor forward one character
+-   CTRL-b - Move the cursor backward one character
+-   CTRL-l - Clear the screen
+-   CTRL-r - Search backward through history
+-   CTRL-s - Search forward through history
+-   CTRL-u - Clear the current line from the cursor to the beginning
+
+Notes: Bash includes a plethora of key combination shortcuts. Of these, the most
+common is the TAB key, which will attempt to complete a token (command or file
+name) or display the options for completion of the token. The CTRL key
+combinations allow breaking out of running processes, searching through the Bash
+history, clearing the current line or screen, and cursor movements.
 
 
 
